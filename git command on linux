@@ -1,0 +1,152 @@
+ubuntu@ip-172-31-13-158:~$ git --version
+git version 2.34.1
+ubuntu@ip-172-31-13-158:~$ ls
+ubuntu@ip-172-31-13-158:~$ mkdir git
+ubuntu@ip-172-31-13-158:~$ cd git/
+ubuntu@ip-172-31-13-158:~/git$ ls
+ubuntu@ip-172-31-13-158:~/git$
+ubuntu@ip-172-31-13-158:~/git$ git clone https://github.com/Gunjan0703/myrepo.git
+Cloning into 'myrepo'...
+remote: Enumerating objects: 18, done.
+remote: Counting objects: 100% (18/18), done.
+remote: Compressing objects: 100% (8/8), done.
+Receiving objects: 100% (18/18), done.
+Resolving deltas: 100% (4/4), done.
+remote: Total 18 (delta 4), reused 15 (delta 4), pack-reused 0 (from 0)
+ubuntu@ip-172-31-13-158:~/git$ ls
+myrepo
+ubuntu@ip-172-31-13-158:~/git$ cd myrepo/
+ubuntu@ip-172-31-13-158:~/git/myrepo$ ls
+index.html  testfileformyrepo
+ubuntu@ip-172-31-13-158:~/git/myrepo$ ls -ltr
+total 8
+-rw-rw-r-- 1 ubuntu ubuntu  33 Jul 18 09:27 testfileformyrepo
+-rw-rw-r-- 1 ubuntu ubuntu 232 Jul 18 09:27 index.html
+ubuntu@ip-172-31-13-158:~/git/myrepo$ git log
+commit 523af98772b03b916a665031f8c8f94ba73883ef (HEAD -> main, origin/main, origin/HEAD)
+Author: Gunjan0703 <164139238+Gunjan0703@users.noreply.github.com>
+Date:   Fri Jul 18 14:44:36 2025 +0530
+
+    Create test file
+
+commit ed5f33fec40953ab755081d2a9f13124aa45941a
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 14:39:46 2025 +0530
+
+    v5
+
+commit 5f1e2fa7e687284b0b9ab8a400a3f0d73df24fa7
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 12:10:12 2025 +0530
+
+    v4
+
+commit 9499cb0c894c0e09e3ddc0779eaed3466feeb3f1
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 11:36:30 2025 +0530
+
+:
+commit 523af98772b03b916a665031f8c8f94ba73883ef (HEAD -> main, origin/main, origin/HEAD)
+Author: Gunjan0703 <164139238+Gunjan0703@users.noreply.github.com>
+Date:   Fri Jul 18 14:44:36 2025 +0530
+
+    Create test file
+
+commit ed5f33fec40953ab755081d2a9f13124aa45941a
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 14:39:46 2025 +0530
+
+    v5
+
+commit 5f1e2fa7e687284b0b9ab8a400a3f0d73df24fa7
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 12:10:12 2025 +0530
+
+    v4
+
+commit 9499cb0c894c0e09e3ddc0779eaed3466feeb3f1
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 11:36:30 2025 +0530
+
+
+ubuntu@ip-172-31-13-158:~/git/myrepo$ git show 5f1e2fa7e687284b0b9ab8a400a3f0d73df24fa7
+commit 5f1e2fa7e687284b0b9ab8a400a3f0d73df24fa7
+Author: Gunjan <gunjanshikha512@gmail.com>
+Date:   Fri Jul 18 12:10:12 2025 +0530
+
+    v4
+
+diff --git a/index.html b/index.html
+index dbc3d33..0b0e826 100644
+--- a/index.html
++++ b/index.html
+@@ -6,6 +6,6 @@
+     <title>Document</title>
+ </head>
+ <body>
+-    <h1> this is version 3</h1>
++    <h1> this is version 4</h1>
+ </body>
+ </html>
+\ No newline at end of file
+ubuntu@ip-172-31-13-158:~/git/myrepo$ git show 5f1e2fa7e687284b0b9ab8a400a3f0d73df24fa7:index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> this is version 4</h1>
+</body>
+</html>
+ubuntu@ip-172-31-13-158:~/git/myrepo$
+ubuntu@ip-172-31-13-158:~/git/myrepo$
+ubuntu@ip-172-31-13-158:~/git/myrepo$ ls
+index.html  testfileformyrepo
+ubuntu@ip-172-31-13-158:~/git/myrepo$ cat index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> this is version 5</h1>
+</body>
+</html>ubuntu@ip-172-31-13-158:~/git/myrepo$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 309 bytes | 309.00 KiB/s, done.
+From https://github.com/Gunjan0703/myrepo
+   523af98..e619096  main       -> origin/main
+Updating 523af98..e619096
+Fast-forward
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ubuntu@ip-172-31-13-158:~/git/myrepo$ cat inex.html
+cat: inex.html: No such file or directory
+ubuntu@ip-172-31-13-158:~/git/myrepo$ cat index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> this is version 6</h1>
+</body>
+</html>ubuntu@ip-172-31-13-158:~/git/myrepo$ Read from remote host 3.15.140.37: Connection reset by peer
+Connection to 3.15.140.37 closed.
+client_loop: send disconnect: Connection reset by peer
+
+Shikha@shikha MINGW64 ~/Downloads
+$ ^C
+
+Shikha@shikha MINGW64 ~/Downloads
+$

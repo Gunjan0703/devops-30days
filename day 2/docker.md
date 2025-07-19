@@ -20,4 +20,5 @@ This is where Docker images are storedDocker Hub is like an app store for Docker
 A Docker container is like actually cooking the meal using the recipe:It's a running instance of an imageIt's the actual application working and doing its jobEach container is isolated from othersYou can have multiple containers from the same image.
 
 
-The most important commands to remember are:docker run - create and start a containerdocker ps - see running containersdocker images - see available imagesdocker stop - stop a containerdocker rm - remove a container
+The most important commands to remember are:docker run
+- create and start a containerdocker ps - see running containersdocker images - see available imagesdocker stop - stop a containerdocker rm - remove a container

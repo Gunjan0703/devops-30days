@@ -27,4 +27,4 @@ A Docker container is like actually cooking the meal using the recipe:It's a run
 - sudo systemctl enable docker - enable docker
 - sudo systemctl status docker - checks the status of the docker whether it is running or not
 
-![Containers and image](images/creatingimageandconatainer.png)
+![Containers and image](images/creatingimageandcontainers.png)

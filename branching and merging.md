@@ -1,4 +1,5 @@
 # Branching
+```
 Enumerating objects: 5, done.
 PS D:\git> git branch
 * main
@@ -95,7 +96,9 @@ git: 'chekout' is not a git command. See 'git --help'.
 
 The most similar command is
         checkout
+```
 #Merging
+```
 PS D:\git> git checkout main
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.

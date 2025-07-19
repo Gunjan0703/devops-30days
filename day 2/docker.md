@@ -26,3 +26,5 @@ A Docker container is like actually cooking the meal using the recipe:It's a run
 - sudo apt install docker.io - install docker on linux
 - sudo systemctl enable docker - enable docker
 - sudo systemctl status docker - checks the status of the docker whether it is running or not
+
+![Containers and image](images/creatingimageandconatainer.png)

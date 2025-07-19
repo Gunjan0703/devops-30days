@@ -19,4 +19,4 @@ This is where Docker images are storedDocker Hub is like an app store for Docker
 # What is a Docker Container?
 A Docker container is like actually cooking the meal using the recipe:It's a running instance of an imageIt's the actual application working and doing its jobEach container is isolated from othersYou can have multiple containers from the same image.
 
-![alt text](Screenshot 2025-07-19 174748.png)
+![Commands]("C:\Users\Shikha\OneDrive\Pictures\Screenshots\commands.png")

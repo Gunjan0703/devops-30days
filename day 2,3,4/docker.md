@@ -16,6 +16,21 @@ This is the main program that runs on your computerIt's like the engine of a car
 This is what you use when you type docker commandsIt's like a remote control for your TV - you press buttons, and it tells the TV what to doWhen you type docker run, the client sends this request to the Docker daemon
 ## 3. Docker Registry (The Store)
 This is where Docker images are storedDocker Hub is like an app store for Docker imagesYou can download (pull) images from here or upload (push) your own
+# 3. Docker Lifecycle
+## Image Lifecycle
+- Build: Create an image from a Dockerfile
+- Tag: Give the image a name and version
+- Push: Upload to a registry (like Docker Hub)
+- Pull: Download from a registry
+- Remove: Delete the image when not needed
+## Container Lifecycle
+- Create: Make a container from an image
+- Start: Begin running the container
+- Stop: Pause the container
+- Restart: Stop and start again
+- Remove: Delete the container permanently
+        
+        
 # What is a Docker Container?
 A Docker container is like actually cooking the meal using the recipe:It's a running instance of an imageIt's the actual application working and doing its jobEach container is isolated from othersYou can have multiple containers from the same image.
 
@@ -141,3 +156,75 @@ root@ip-172-31-4-244:/home/ubuntu/myapp# curl 172.17.0.2
 hello vilas
 root@ip-172-31-4-244:/home/ubuntu/myapp#
 ```
+# Working with containers
+## running container
+- Basic run
+docker run hello-world
+
+- Run with a name
+docker run --name my-container nginx
+
+- Run in background (detached mode)
+docker run -d nginx
+
+- Run with port mapping
+docker run -p 8080:80 nginx
+
+- Run interactively
+docker run -it ubuntu /bin/bash
+
+## listing container
+- Show running containers
+docker ps
+
+- Show all containers (running and stopped)
+docker ps -a
+
+- Show only container IDs
+docker ps -q
+
+## Maintaining container state
+- Stop a running container
+docker stop container_name
+
+- Start a stopped container
+docker start container_name
+
+- Restart a container
+docker restart container_name
+
+- Pause a container
+docker pause container_name
+
+- Unpause a container
+docker unpause container_name
+
+## Entering containers
+- Execute a command in a running container
+docker exec -it container_name /bin/bash
+
+- Attach to a running container
+docker attach container_name
+
+## Container Information
+- Show container details
+docker inspect container_name
+
+- Show container logs
+docker logs container_name
+
+- Show running processes in container
+docker top container_name
+
+- Show resource usage
+docker stats container_name
+
+## Removing containers
+- Remove a stopped container
+docker rm container_name
+
+- Remove a running container (force)
+docker rm -f container_name
+
+- Remove all stopped containers
+docker container prune

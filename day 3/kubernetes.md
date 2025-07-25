@@ -37,3 +37,16 @@ Each object has a specific job:
   - If there are too few pods, it creates more
    ### Creating replica set
    ![replica](image/replica.png)
+   ![create](image/pic.png)
+   ![test](image/testreplica.png)
+   ![scaling](image/scalingreplica.png)
+## Deployment
+A Deployment is like a smart manager that handles ReplicaSets for you. It's the most commonly used object in Kubernetes because it solves the update problem.
+**What it does:**
+- Creates and manages ReplicaSets
+- Handles rolling updates with zero downtime
+- Can rollback to previous versions
+- Provides update history
+  ### Creating a deployment
+  ![yaml](image/deployment_yaml.png)
+  ![create](image/createdeployment.png)

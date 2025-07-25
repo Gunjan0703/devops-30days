@@ -36,4 +36,4 @@ Each object has a specific job:
   - If there are too many pods, it removes extras
   - If there are too few pods, it creates more
    ### Creating replica set
-   
+   ![replica](image/replica.png)

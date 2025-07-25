@@ -68,10 +68,13 @@ A Service is like a permanent address for your pods. It provides:-
 - Different ways to expose your application
 ### Types of services
  ![cluster](image/cluster.png)
+ 
  **Use case:** Internal communication between services (like API to database)
 
  ![node port](image/node.png)
+ 
  **Use case:** Development environments, accessing services from outside the cluster
 
  ![load balancer](image/load.png)
+ 
  **Use case:** Production applications that need to be accessible from the internet

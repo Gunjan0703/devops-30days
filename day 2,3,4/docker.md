@@ -158,73 +158,51 @@ root@ip-172-31-4-244:/home/ubuntu/myapp#
 ```
 # Working with containers
 ## running container
-- Basic run
-docker run hello-world
+- Basic run--docker run hello-world
 
-- Run with a name
-docker run --name my-container nginx
+- Run with a name--docker run --name my-container nginx
 
-- Run in background (detached mode)
-docker run -d nginx
+- Run in background (detached mode)--docker run -d nginx
 
-- Run with port mapping
-docker run -p 8080:80 nginx
+- Run with port mapping--docker run -p 8080:80 nginx
 
-- Run interactively
-docker run -it ubuntu /bin/bash
+- Run interactively--docker run -it ubuntu /bin/bash
 
 ## listing container
-- Show running containers
-docker ps
+- Show running containers--docker ps
 
-- Show all containers (running and stopped)
-docker ps -a
+- Show all containers (running and stopped)--docker ps -a
 
-- Show only container IDs
-docker ps -q
+- Show only container IDs--docker ps -q
 
 ## Maintaining container state
-- Stop a running container
-docker stop container_name
+- Stop a running container--docker stop container_name
 
-- Start a stopped container
-docker start container_name
+- Start a stopped container--docker start container_name
 
-- Restart a container
-docker restart container_name
+- Restart a container--docker restart container_name
 
-- Pause a container
-docker pause container_name
+- Pause a container--docker pause container_name
 
-- Unpause a container
-docker unpause container_name
+- Unpause a container--docker unpause container_name
 
 ## Entering containers
-- Execute a command in a running container
-docker exec -it container_name /bin/bash
+- Execute a command in a running container--docker exec -it container_name /bin/bash
 
-- Attach to a running container
-docker attach container_name
+- Attach to a running container--docker attach container_name
 
 ## Container Information
-- Show container details
-docker inspect container_name
+- Show container details--docker inspect container_name
 
-- Show container logs
-docker logs container_name
+- Show container logs--docker logs container_name
 
-- Show running processes in container
-docker top container_name
+- Show running processes in container--docker top container_name
 
-- Show resource usage
-docker stats container_name
+- Show resource usage--docker stats container_name
 
 ## Removing containers
-- Remove a stopped container
-docker rm container_name
+- Remove a stopped container--docker rm container_name
 
-- Remove a running container (force)
-docker rm -f container_name
+- Remove a running container (force)--docker rm -f container_name
 
-- Remove all stopped containers
-docker container prune
+- Remove all stopped containers--docker container prune

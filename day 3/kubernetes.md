@@ -54,3 +54,17 @@ A Deployment is like a smart manager that handles ReplicaSets for you. It's the 
   ![yaml](image/deployment_yaml.png)
   
   ![create](image/createdeployment.png)
+
+# Services: Making Pods Accessible
+The Problem with Pod IPsPods have IP addresses, but there's a problem:
+- Pod IPs change when pods are recreated
+- You have multiple pods behind a deployment
+- You need a single, stable way to access your application
+## What is a Service?
+A Service is like a permanent address for your pods. It provides:- 
+- A stable IP address that doesn't change
+- Load balancing across multiple pods
+- Service discovery (other apps can find your service by name)
+- Different ways to expose your application
+### Types of services
+

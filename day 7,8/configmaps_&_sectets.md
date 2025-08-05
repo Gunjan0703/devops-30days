@@ -60,4 +60,4 @@ They're base64 encoded and can be encrypted at rest.
 
 ## Creating secrets with YAML
 
-![yaml](image/sec_yaml.pmg)
+![yaml](image/sec_yaml.png)

@@ -3,7 +3,7 @@ YAML (YAML Ain't Markup Language) is a human-readable data serialization standar
 
 ### Basic YAML syntax rules
 
-![rule](image/rule.png)
+![rule](img/rule.png)
 
 - list/arrays
 ```
@@ -29,7 +29,7 @@ employees:
       - Figma
       - Photoshop
 ```
-![rule2](image/rule2.png)
+![rule2](img/rule2.png)
 
 - YAML data types
 ```

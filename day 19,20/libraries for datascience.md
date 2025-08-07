@@ -195,7 +195,7 @@ These libraries work together seamlessly:
 - Install all core libraries at once:
 ```
 # Using pip
-pip install numpy pandas matplotlib seaborn scipy scikit-learn jupyter
+pip install numpy pandas matplotlib seaborn scipy scikit-learn 
 
 # Using conda
 conda install numpy pandas matplotlib seaborn scipy scikit-learn jupyter

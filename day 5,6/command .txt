@@ -1,0 +1,83 @@
+git clone https://github.com/LondheShubham153/TWSThreeTierAppChallenge.git
+create docker file 
+install docker
+sudo chown /var/run/docker.sock
+  docker ps
+docker build -t 3-tier-frontend .
+  docker images
+docker run -d -p 3000:3000 3-tier-frontend:latest
+docker kill 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
+  create iam user
+aws configure
+create ecr public/private
+  click view push command
+
+----------------------------------------
+  backend
+  create new repo for backend
+-----------------------------------
+needs to be run out of directory
+
+  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+kubectl version --short --client
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
+aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
+kubectl get nodes
+--------------------------------------------
+kubernetes manifest
+database tier
+
+kubectl create namespace three-tier
+kubectl apply -f deploy.yaml
+  kubectl get deployment -n three-tier
+  kubectl apply -f secrets.yaml
+  kubectl get pod -n three-tier
+  kubectl apply -f service.yaml
+  kubectl get svc -n three-tier
+  cd ..
+  ------------------------------
+  backend tier
+  vim backend-deployment.yaml
+  image under spec conatiner need to be updated (07622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest) to latetst ecr image
+kubectl apply -f deployment.yaml
+  kubectl apply -f service.yaml
+  kubectl get pod -n three-tier
+
+  ----------------------------------------
+  frontend tier
+
+image under spec conatiner need to be updated ( 407622020962.dkr.ecr.us-east-1.amazonaws.com/frontend:latest) to latest ecr image
+kubectl apply -f deployment.yaml
+  kubectl apply -f service.yaml
+  kubectl get pod -n three-tier
+  ----------------------------------
+  load balancer service acc create
+
+
+  curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicyForThreeTier --policy-document file://iam_policy.json
+eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=three-tier-cluster --approve
+eksctl create iamserviceaccount --cluster=three-tier-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::626072240565:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=us-west-2
+
+  ------------------------------
+  deployment 
+
+sudo snap install helm --classic
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
+kubectl get deployment -n kube-system aws-load-balancer-controller
+
+  -----------------------
+  cd k8s_manifest/
+kubectl apply -f full_stack_lb.yaml
+  kubectll get ing -n three-tier

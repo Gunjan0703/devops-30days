@@ -138,7 +138,7 @@
   138  ls
   139  cd Event_Managment/
   140  ls
-  141  docker build -t back-end .
+  141  docker build -t gunjan1603/back-end .
   142  cd ..
   143  cd Event_Managment/src/main/java/com/EventManagment/Controllers/
   144  ls
@@ -147,7 +147,6 @@
   147  cd -
   148  docker images
   149  docker login
-  150  docker -t back-end:latest gunjan1603/3-tier-deployment:latest
   151  docker tag back-end:latest gunjan1603/3-tier-deployment:latest
   152  docker push gunjan1603/3-tier-deployment:latest
   153  cd ..
@@ -159,5 +158,62 @@
   159  kubectl apply -f java-springboot-service.yaml 
   160  kubectl get svc
   161  cat springboot-deploy.yaml 
-  162  q
-  163  cat java-springboot-service.yaml
+  162  cat java-springboot-service.yaml
+  163  curl -X POST \
+      http://13.222.195.4:30007/api/events \
+     -H "Content-Type: application/json" \
+    
+     -d '{
+
+           "name": "Annual Tech Summit",
+
+           "description": "A gathering for tech enthusiasts and professionals.",
+
+           "location": "Virtual",
+
+           "date": "2025-10-26"
+
+         }' \
+
+history
+  165  kubectl get po
+  166  kubectl get services
+  167  curl -X POST      -H "Content-Type: application/json"      -d '{
+           "name": "Annual Tech Summit",
+           "description": "A gathering for tech enthusiasts and professionals.",
+           "location": "Virtual",
+           "date": "2025-10-26"
+  168  kubectl get all -o wide
+  169  cd ..
+  170  cd Backend-Java/Event_Managment/src/main/java/com/EventManagment/Config/
+  171  ls
+  172  vi WebConfig.java 
+  173  cd -
+  174  ls
+  175  cd Frontend-ReactJs/event-management-dashboard/src/services/
+  176  vi api.js 
+  177  cd -
+  178  cd Backend-Java/Event_Managment/
+  179  ls
+  180  docker build -t gunjan1603/back-end .
+  181  ocker tag back-end:latest gunjan1603/3-tier-deployment:latest
+  182  docker tag back-end:latest gunjan1603/3-tier-deployment:latest
+  183  docker push gunjan1603/3-tier-deployment:lates
+  184  docker push gunjan1603/3-tier-deployment:latest
+  185  cat api.js
+  186  cd Event_Managment/src/main/java/com/EventManagment/Config/
+  187  ls
+  188  cd src/main/java//com/EventManagment/Config/
+  189  ls
+  190  vi WebConfig.java 
+  191  cd ..
+  192  docker build -t back-end .
+  193  docker push gunjan1603/3-tier-deployment:latest
+  194  cd -
+  195  cd ..
+  196  cd Kubernetes/
+  197  ls
+  198  kubectl apply -f springboot-deploy.yaml 
+  199  kubectl get svc
+  200  history
+ 

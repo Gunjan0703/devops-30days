@@ -129,9 +129,9 @@ In this example:
 
 --> The .spec.template field contains the following sub-fields:
 
-The Pods are labeled app: nginx using the .metadata.labels field.
-The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
-Create one container and name it nginx using the .spec.containers[0].name field.
+- The Pods are labeled app: nginx using the .metadata.labels field.
+- The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
+- Create one container and name it nginx using the .spec.containers[0].name field.
 
 ## How do you update? 
 

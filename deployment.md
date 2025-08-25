@@ -92,9 +92,11 @@ During updates, the controller:
 
 
 ## How to create,update a deployment?
+
 Instead of giving a series of commands ("create a Pod," "add this container," etc.), you simply declare the final state you want ("I want three replicas of this container image"). This makes your infrastructure easier to manage, version, and share.
 
 CREATE--
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -119,19 +121,16 @@ spec:
 
 In this example:
 
-A Deployment named nginx-deployment is created, indicated by the .metadata.name field. This name will become the basis for the ReplicaSets and Pods which are created later.
-
-The Deployment creates a ReplicaSet that creates three replicated Pods, indicated by the .spec.replicas field.
-
-The .spec.selector field defines how the created ReplicaSet finds which Pods to manage. 
-
-The .spec.template field contains the following sub-fields:
-
-The Pods are labeled app: nginx using the .metadata.labels field.
-The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
-Create one container and name it nginx using the .spec.containers[0].name field.
+--> A Deployment named nginx-deployment is created, indicated by the .metadata.name field. This name will become the basis for the ReplicaSets and Pods which are created later.
+--> The Deployment creates a ReplicaSet that creates three replicated Pods, indicated by the .spec.replicas field.
+--> The .spec.selector field defines how the created ReplicaSet finds which Pods to manage. 
+--> The .spec.template field contains the following sub-fields:
+--> The Pods are labeled app: nginx using the .metadata.labels field.
+--> The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
+--> Create one container and name it nginx using the .spec.containers[0].name field.
 
 ## How do you update? 
+
 You simply modify the YAML file (e.g., change the image version) and run kubectl apply -f [filename]. The Deployment controller detects the change and automatically starts the update process.
 
 ### Why Update?
@@ -141,14 +140,20 @@ You simply modify the YAML file (e.g., change the image version) and run kubectl
 ⦁	Bug fixes: Deploy corrected versions
 
 Monitoring Updates
+--------------------------------------------------
 bash# Watch deployment status
 kubectl rollout status deployment/nginx-deployment
+--------------------------------------------------
 
+--------------------------------------------------
 #Get deployment details
 kubectl describe deployment nginx-deployment
+--------------------------------------------------
 
+---------------------------------------------------
 #View rollout history
 kubectl rollout history deployment/nginx-deployment
+---------------------------------------------------
 
 ## ROLLOUT STRATERGIES-
 
@@ -296,9 +301,10 @@ example: check Kubernetes documentation
 1.	Suppose that you made a typo while updating the Deployment, by putting the image name as nginx:1.161 instead of nginx:1.16.1.
 2.	The rollout gets stuck.Press Ctrl-C to stop the above rollout status watch .
 3.	You see that the number of old replicas (adding the replica count from nginx-deployment-1564180365 and nginx-deployment-2035384211) is 3, and the number of new replicas (from nginx-deployment-3066724191) is 1.
+4.	
 ****note:The Deployment controller stops the bad rollout automatically, and stops scaling up the new ReplicaSet. This depends on the rollingUpdate parameters (maxUnavailable specifically) that you have specified. Kubernetes by default sets the value to 25%.****
-4.	Get the description of the Deployment.
-5.	To fix this, you need to rollback to a previous revision of Deployment that is stable.
+5.	Get the description of the Deployment.
+6.	To fix this, you need to rollback to a previous revision of Deployment that is stable.
 
 ### Types Of Rollback -
 - Automatic Rollback on Failure in Kubernetes?

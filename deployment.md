@@ -140,18 +140,19 @@ You simply modify the YAML file (e.g., change the image version) and run kubectl
 ⦁	Bug fixes: Deploy corrected versions
 
 Monitoring Updates
+- bash
+- #Watch deployment status
 --------------------------------------------------
-bash# Watch deployment status
 kubectl rollout status deployment/nginx-deployment
 --------------------------------------------------
 
+- #Get deployment details
 --------------------------------------------------
-#Get deployment details
 kubectl describe deployment nginx-deployment
 --------------------------------------------------
 
+- #View rollout history
 ---------------------------------------------------
-#View rollout history
 kubectl rollout history deployment/nginx-deployment
 ---------------------------------------------------
 

@@ -2,7 +2,7 @@
 
 -------------------------------------------------------------------------------
 
-# what is deployment in k8s? 
+## What is deployment in k8s? 
 
 A Deployment is a high-level API object (kind: Deployment) that provides declarative updates for Pods and ReplicaSets.(declarative updates mean we are defining the desired end state rather than step by step instructions .)
 
@@ -10,10 +10,10 @@ It manages the desired state of applications (number of replicas, image versions
 
 Kubernetes automatically ensures the actual state matches the desired state, even after failures.
 
-## Why use a Deployment?
+### Why use a Deployment?
  It automates the process of updating and scaling of application, making it easier to manage. Instead of manually creating and updating individual Pods, we can simply declare your desired state, and Kubernetes handles the complex tasks of ensuring the right number of Pods are running.it also have a self healing property which automatically replaces failed pods.
 
-## How does a Deployment work?
+### How does a Deployment work?
  A Deployment manages a ReplicaSet. When you create a Deployment, it creates a ReplicaSet to maintain the desired number of Pods. When you update the Deployment, it creates a new ReplicaSet and intelligently handles the rollout from the old version to the new version.
 
 #Deployment creates and manages ReplicaSets
@@ -26,7 +26,7 @@ my-app-deployment
     ├── my-app-pod-2
     └── my-app-pod-3
 
-## BASIC DEPLOYMENT STRUCTURE-
+#### BASIC DEPLOYMENT STRUCTURE-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,7 +49,7 @@ spec:
         ports:
         - containerPort: 80
 
-## what are its usecases? 
+### What are its usecases? 
 
 ⦁	Create a Deployment to rollout a ReplicaSet. The ReplicaSet creates Pods in the background. Check the status of the rollout to see if it succeeds or not.
 
@@ -65,32 +65,33 @@ spec:
 
 ⦁	Clean up older ReplicaSets that you don't need anymore.
 
-# what is deployment controller?
+## Deployment Controller:
+
 The Deployment Controller is a Kubernetes controller that runs in the control plane and continuously monitors the state of Deployment objects, ensuring the actual state matches the desired state.
 
-## Why is it Important?
+### Why is it Important?
 ⦁	State Reconciliation: Continuously ensures desired state is maintained
 ⦁	Automatic Healing: Recreates failed pods automatically
 ⦁	Update Management: Handles rolling updates and rollbacks
 ⦁	ReplicaSet Management: Creates and manages ReplicaSets for different versions
 
-## How does it work? 
+### How does it work? 
 It acts like an intelligent feedback loop. When it sees a difference between the desired state (e.g., replicas: 3) and the current state (e.g., only two Pods are running), it takes action to fix the discrepancy.
 
-## Controller responsibilities-
+### Controller responsibilities-
 ⦁	replicaset management
 ⦁	pod lifecycle management
 ⦁	Update Orchestration
 
 During updates, the controller:
--Creates new ReplicaSet with updated specifications
--Gradually scales up new ReplicaSet
--Gradually scales down old ReplicaSet
--Monitors pod readiness and health
--Updates deployment status
+- Creates new ReplicaSet with updated specifications
+- Gradually scales up new ReplicaSet
+- Gradually scales down old ReplicaSet
+- Monitors pod readiness and health
+- Updates deployment status
 
 
-# how to create,update a deployment?
+## How to create,update a deployment?
 Instead of giving a series of commands ("create a Pod," "add this container," etc.), you simply declare the final state you want ("I want three replicas of this container image"). This makes your infrastructure easier to manage, version, and share.
 
 CREATE--
@@ -133,7 +134,7 @@ Create one container and name it nginx using the .spec.containers[0].name field.
 ## How do you update? 
 You simply modify the YAML file (e.g., change the image version) and run kubectl apply -f [filename]. The Deployment controller detects the change and automatically starts the update process.
 
-## Why Update?
+### Why Update?
 ⦁	Security patches: Update to newer, secure images
 ⦁	Feature updates: Deploy new application versions
 ⦁	Configuration changes: Modify environment variables, resource limits
@@ -149,13 +150,13 @@ kubectl describe deployment nginx-deployment
 #View rollout history
 kubectl rollout history deployment/nginx-deployment
 
-# rolling update and recreate? 
+## ROLLOUT STRATERGIES-
 
-## what is recreate stratergy?
+### what is recreate stratergy?
 Recreate strategy terminates all existing pods before creating new ones, causing downtime but ensuring no version mixing.
 The Recreate strategy is useful for applications that can't have two different versions running at the same time, bcz it results in a brief period of downtime.
 
-## Why Use Recreate?
+#### Why Use Recreate?
 
 Version Isolation: No risk of multiple versions running simultaneously
 Resource Constraints: When you can't run multiple versions together
@@ -163,68 +164,68 @@ State Conflicts: When old and new versions can't coexist
 Database Migrations: When schema changes require exclusive access
 
 
-## What is Rolling Update?
+### What is Rolling Update?
 Rolling Update is the default deployment strategy that gradually replaces old pods with new ones, ensuring zero downtime during updates.
 
-## Why Use Rolling Update?
+#### Why Use Rolling Update?
 
 Zero Downtime: Application remains available during updates
 Gradual Rollout: Risk mitigation by updating pods incrementally
 Automatic Rollback: Can detect issues and rollback automatically
 Resource Efficient: Doesn't require double resources
 
-# Max Availability and Max Surge
+## Max Availability and Max Surge
 These parameters control how rolling updates behave and are crucial for maintaining service availability while managing resource usage during deployments.
 
-## What is Max Unavailable?
+### What is Max Unavailable?
 maxUnavailable specifies the maximum number of pods that can be unavailable during the update process.
 
-## Why Important?
+#### Why Important?
 
 Service Availability: Ensures minimum number of pods remain running
 Traffic Handling: Maintains capacity to handle requests
 SLA Compliance: Helps meet uptime requirements
 
-# Max Surge
+### Max Surge
 What is Max Surge?
 maxSurge specifies the maximum number of pods that can be created above the desired number of pods during updates.
 
-## Why Important?
+#### Why Important?
 
 Faster Updates: More pods can be created simultaneously
 Resource Planning: Controls additional resource usage
 Update Speed: Balances speed vs resource consumption
 
-## How do they work?
+#### How do they work?
  maxUnavailable sets the maximum number of Pods that can be unavailable during the update. maxSurge sets the maximum number of Pods that can be created above the desired replica count.
 
-## How do they work?(rolling and recreate)
+#### How do they work?(rolling and recreate)
 
 RollingUpdate: A new Pod is created, and once it's ready, an old Pod is terminated. This process repeats until all Pods are updated.
 
 Recreate: All old Pods are deleted, and then all new Pods are created.
 
-# bluegreen and canary update
+## BLUE GREEN UPDATE AND CANARY UPDATE
 
-## What is Canary Deployment?
+### What is Canary Deployment?
 
 Canary Deployment is a deployment strategy that gradually rolls out changes to a small subset of users before rolling it out to the entire infrastructure.
 
-### Why Use Canary Deployments?
+#### Why Use Canary Deployments?
 
-Risk Mitigation: Test with real users but limit blast radius
-Gradual Rollout: Increase confidence as rollout progresses
-Performance Testing: Monitor performance with real traffic
-User Feedback: Get early feedback from subset of users
-Automated Rollbacks: Rollback automatically if metrics degrade
+1. Risk Mitigation: Test with real users but limit blast radius
+2. Gradual Rollout: Increase confidence as rollout progresses
+3. Performance Testing: Monitor performance with real traffic
+4. User Feedback: Get early feedback from subset of users
+5. Automated Rollbacks: Rollback automatically if metrics degrade
 
-### How Canary Works:
+#### How Canary Works:
  You expose the new version to a small subset of users (the "canary") and monitor it. If it's stable, you gradually increase the traffic until the new version is fully rolled out.
 
-## What is Blue-Green Deployment?
+### What is Blue-Green Deployment?
 Blue-Green Deployment is a deployment strategy that reduces downtime and risk by running two identical production environments called Blue and Green. At any time, only one environment is live serving production traffic.
 
-### Why Use Blue-Green Deployments?
+#### Why Use Blue-Green Deployments?
 
 Zero Downtime: Instant switch between versions
 Easy Rollback: Switch back to previous version immediately
@@ -232,13 +233,13 @@ Full Testing: Test complete environment before switching
 Risk Mitigation: Reduced risk of deployment failures affecting users
 Database Testing: Test with production data without affecting live system
 
-### How blue-green works?
+#### How blue-green works?
 You deploy the new version to a separate environment ("Green") and then, with a single command, switch all traffic from the old "Blue" environment to the "Green" environment.
 
-### Why use them?
+#### Why use them?
 They offer more control and less risk than a simple rolling update. They are used for mission-critical applications where downtime is unacceptable and a smooth, safe rollout is paramount.
 
-## When to Use Each Strategy
+#### When to Use Each Strategy
 
 ⦁	Use Blue-Green When:
 
@@ -256,7 +257,7 @@ They offer more control and less risk than a simple rolling update. They are use
 4.	Complex Applications: Applications with complex user interactions
 5.	Resource Constraints: Limited additional resources available
 
-## Best Practices
+### Best Practices
 ⦁	For Blue-Green:
 
 1.	Database Strategy: Use compatible database schemas or separate databases
@@ -273,11 +274,11 @@ They offer more control and less risk than a simple rolling update. They are use
 4.	User Segmentation: Consider canary for specific user segments
 5.	Feature Flags: Combine with feature flags for fine-grained control
 
-# how to Roll Back a Deployment?
+## How to Roll Back a Deployment?
 
 Rolling back means reverting your application to a previous, stable version.
 
-## Why Rollback?
+### Why Rollback?
 
 Failed Updates: When new version has critical bugs
 Performance Issues: New version performs poorly
@@ -285,7 +286,7 @@ Configuration Errors: Wrong environment variables or settings
 Security Issues: New version introduces vulnerabilities
 User Experience: New version degrades user experience
 
-### Why is this necessary? 
+#### Why is this necessary? 
 When a new release introduces a bug or causes unexpected behavior, you need a quick way to revert to a working version to minimize impact on your users.
 
 ### How do you roll back? 
@@ -299,12 +300,12 @@ example: check Kubernetes documentation
 4.	Get the description of the Deployment.
 5.	To fix this, you need to rollback to a previous revision of Deployment that is stable.
 
-## Types-
+### Types Of Rollback -
 - Automatic Rollback on Failure in Kubernetes?
 
 Automatic rollback is a feature in Kubernetes Deployments where the system reverts to the previous stable ReplicaSet if the new rollout fails (e.g., Pods crash, readiness probes fail, insufficient resources).
 
-### Why is it needed?
+#### Why is it needed?
 
 To ensure application stability in production.
 
@@ -314,7 +315,7 @@ To avoid manual intervention during critical failures.
 
 To protect users from broken or unavailable applications.
 
-### How does it work?
+#### How does it work?
 
 1.	You apply a new Deployment (say, v2).
 
@@ -327,12 +328,12 @@ To protect users from broken or unavailable applications.
 
 5.	The Deployment automatically rolls back to the last known good ReplicaSet (v1).
 
-## Rollback with Validation in Kubernetes?
+### Rollback with Validation in Kubernetes?
 
 Rollback with validation means that when Kubernetes reverts a Deployment to a previous revision, it ensures the restored version is valid and working correctly before considering the rollback successful.
 It’s not just about going back — it’s about going back safely.
 
-### Why is it needed?
+#### Why is it needed?
 
 A rollback may also fail if the previous version has hidden issues (e.g., bad config, outdated dependency).
 
@@ -340,7 +341,7 @@ Validation ensures Kubernetes doesn’t blindly switch to an unstable version.
 
 Provides confidence that the system is actually restored to a working state.
 
-### How does it work?
+#### How does it work?
 
 1. Trigger: Rollback happens automatically (on failure) or manually (admin request).
    
@@ -356,15 +357,15 @@ Provides confidence that the system is actually restored to a working state.
 
 7. If Pods fail validation → rollback is itself considered failed → Deployment status shows error → admin intervention needed.
 
-# how to scale a deployment?
-## Horizontal  pod scaling 
+## SCALING IN K8S
+- Horizontal  pod scaling 
 Scaling means increasing or decreasing the number of Pod replicas.
 
-### Why scale?
+#### Why scale?
 
 You scale to handle changes in traffic or workload. When traffic increases, you scale up to maintain performance. When traffic decreases, you scale down to save resources.
 
-### Horizontal Scaling Reasons:
+#### Horizontal Scaling Reasons:
 
 - Increased Load: More users accessing your application
 - Performance Issues: Response times increasing
@@ -372,44 +373,44 @@ You scale to handle changes in traffic or workload. When traffic increases, you 
 - Geographic Distribution: Serve users from multiple regions
 - Resource Optimization: Better resource utilization
 
-### How do you scale?
+#### How do you scale?
 
 - Manual: You manually set the replica count using the kubectl scale command.
 
 - Automatic: You use the Horizontal Pod Autoscaler (HPA), which automatically scales based on resource metrics like CPU utilization.
 
-### What is HPA?
+### HPA:
 
 Horizontal Pod Autoscaler (HPA) automatically scales the number of pods in a deployment, replica set, or stateful set based on observed metrics like CPU utilization, memory usage, or custom metrics.
 
-### Why Use HPA?
+#### Why Use HPA?
 
-#### Performance Benefits:
+1. Performance Benefits:
 
-Load Distribution: Spread load across multiple instances
-Fault Tolerance: Multiple instances provide redundancy
-Response Time: More instances can handle more concurrent requests
-Throughput: Linear scaling of processing capacity
+- Load Distribution: Spread load across multiple instances
+- Fault Tolerance: Multiple instances provide redundancy
+- Response Time: More instances can handle more concurrent requests
+- Throughput: Linear scaling of processing capacity
 
-#### Cost Benefits:
+2. Cost Benefits:
 
-Dynamic Scaling: Scale down during low traffic
-Resource Efficiency: Only use what you need
-Automatic Response: No manual intervention required
+- Dynamic Scaling: Scale down during low traffic
+- Resource Efficiency: Only use what you need
+- Automatic Response: No manual intervention required
 
-### How it works:
+#### How it works:
 
-Monitors metrics every 15 seconds (default)
-Compares current metrics against target values
-Calculates desired replica count using: desiredReplicas = ceil[currentReplicas * (currentMetricValue / desiredMetricValue)]
-Scales pods horizontally (adds/removes pod replicas)
+1. Monitors metrics every 15 seconds (default)
+2. Compares current metrics against target values
+3. Calculates desired replica count using: desiredReplicas = ceil[currentReplicas * (currentMetricValue / desiredMetricValue)]
+4. Scales pods horizontally (adds/removes pod replicas)
 Example scenario: If CPU usage exceeds 70%, HPA might scale from 3 to 5 pods to distribute the load.
 
-## Vertical Pod Autoscaler (VPA)
+### Vertical Pod Autoscaler (VPA)
 
 VPA automatically adjusts the CPU and memory requests/limits for containers in pods based on historical usage patterns.
 
-### How it works:
+#### How it works:
 
 Analyzes resource usage history and current demand
 
@@ -423,10 +424,10 @@ Uses machine learning algorithms to predict optimal resource requirements
 
 Example scenario: If a pod consistently uses 200m CPU but requests 100m, VPA increases the request to prevent resource starvation.
 
-## Cluster Autoscaler (CA)
+### Cluster Autoscaler (CA)
 CA automatically adjusts the number of nodes in a cluster based on pod scheduling needs.
 
-### How it works:
+#### How it works:
 
 Monitors for pods that can't be scheduled due to insufficient resources
 Adds nodes when pods are pending due to resource constraints
@@ -436,12 +437,12 @@ Considers pod disruption budgets and local storage before removing nodes
 
 Example scenario: When HPA creates new pods but no nodes have capacity, CA provisions additional nodes to accommodate them.
 
-# metric server,deamon set/deamon set controller?
+## METRIC SERVER, DEAMONSET AND DEAMONSET CONTROLLER
 
-## What is Metrics Server?
+### What is Metrics Server?
 Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes built-in autoscaling pipelines. It collects resource metrics from kubelets and exposes them in Kubernetes apiserver through Resource Metrics API.
 
-### Why is Metrics Server Important?
+#### Why is Metrics Server Important?
 
 The HPA needs data to make scaling decisions. The Metrics Server is a key component that provides this data by collecting resource usage from all your nodes and Pods.
 
@@ -451,11 +452,11 @@ The HPA needs data to make scaling decisions. The Metrics Server is a key compon
 - Scheduler Decisions: Helps scheduler make better placement decisions
 - Cluster Monitoring: Essential for cluster resource management
 
-### how it works?
+#### how it works?
 
-#### Architecture:
+##### Architecture:
 -----------------------------------------------------------------------------------------
-| kubelet (on each node) → Metrics Server → Kubernetes API Server → HPA/VPA/kubectl top |
+  kubelet (on each node) → Metrics Server → Kubernetes API Server → HPA/VPA/kubectl top 
 -----------------------------------------------------------------------------------------
 
 Data Flow:
@@ -466,10 +467,10 @@ Data Flow:
 4. Kubernetes API serves metrics through Resource Metrics API
 5. Consumers (HPA, VPA, kubectl) use metrics for decisions
 
-## Deamonsets:
+### Deamonsets:
 A DaemonSet ensures that a single copy of a Pod runs on every (or a selected subset of) node. This is needed for cluster-level services like log collectors or monitoring agents that must be present on every machine.
 
-### Why Use DaemonSets?
+#### Why Use DaemonSets?
 
 1. Node-level Services: Services that need to run on every node
 2. Monitoring Agents: Collect metrics from each node
@@ -478,10 +479,10 @@ A DaemonSet ensures that a single copy of a Pod runs on every (or a selected sub
 5. Storage Daemons: Node-local storage services
 6. Security Agents: Security monitoring on every node
 
-## DaemonSet Controller:
+### DaemonSet Controller:
 The DaemonSet Controller is a Kubernetes controller that manages DaemonSet objects, ensuring that the desired daemon pods are running on appropriate nodes.
 
-### How it works?
+#### How it works?
 
 1. Watch for DaemonSet objects
 2. Watch for Node additions/removals
@@ -489,9 +490,9 @@ The DaemonSet Controller is a Kubernetes controller that manages DaemonSet objec
 4. Handle node taints and tolerations
 5. Update DaemonSet status
 
-# How to Complete Deployment? 
+## How to Complete Deployment? 
 
-### What Makes a Deployment "Complete"?
+#### What Makes a Deployment "Complete"?
 
 Kubernetes marks a Deployment as complete when it has the following characteristics:
 
@@ -499,7 +500,7 @@ Kubernetes marks a Deployment as complete when it has the following characterist
 - All replicas available: All replicas associated with the Deployment are available and ready to serve traffic
 - No old replicas: No old replicas for the Deployment are running
 
-### Why is Completion Status Important?
+#### Why is Completion Status Important?
 
 Deployment Validation: Confirms successful deployment
 Automation Triggers: Can trigger next steps in CI/CD pipelines
@@ -507,12 +508,12 @@ Monitoring: Helps monitoring systems understand deployment state
 Troubleshooting: Identifies stuck or failed deployments
 SLA Compliance: Ensures service level agreements are met
 
-# VERSION UPDATE AND CHANGE CAUSE
+## VERSION UPDATE AND CHANGE CAUSE
 
-## Version Update
+### Version Update
 When you perform a version update, you are essentially telling the Deployment controller to switch from an old container image to a new one. This is typically done by editing the Deployment's manifest file and changing the spec.template.spec.containers.image field. For example, updating an application from version 1.0 to 2.0
 
-### Why is it needed?
+#### Why is it needed?
 
 - New Features: To introduce new functionalities to users.
 
@@ -522,8 +523,8 @@ When you perform a version update, you are essentially telling the Deployment co
 
 - Performance Improvements: To make the application run faster and more efficiently.
 
-## change-cause
+### CHANGE-CAUSE
 The change-cause is an annotation you can add to a Deployment.
 
-### What is the need for change-cause?
+#### What is the need for change-cause?
 It's a simple way to document the reason for a change. When you look at the rollout history, you can see not just what was changed but why it was changed, which is invaluable for troubleshooting.

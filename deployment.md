@@ -122,12 +122,16 @@ spec:
 In this example:
 
 --> A Deployment named nginx-deployment is created, indicated by the .metadata.name field. This name will become the basis for the ReplicaSets and Pods which are created later.
+
 --> The Deployment creates a ReplicaSet that creates three replicated Pods, indicated by the .spec.replicas field.
+
 --> The .spec.selector field defines how the created ReplicaSet finds which Pods to manage. 
+
 --> The .spec.template field contains the following sub-fields:
---> The Pods are labeled app: nginx using the .metadata.labels field.
---> The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
---> Create one container and name it nginx using the .spec.containers[0].name field.
+
+The Pods are labeled app: nginx using the .metadata.labels field.
+The Pod template's specification, or .spec field, indicates that the Pods run one container, nginx, which runs the nginx Docker Hub image at version 1.14.2.
+Create one container and name it nginx using the .spec.containers[0].name field.
 
 ## How do you update? 
 
@@ -459,7 +463,7 @@ The HPA needs data to make scaling decisions. The Metrics Server is a key compon
 - Scheduler Decisions: Helps scheduler make better placement decisions
 - Cluster Monitoring: Essential for cluster resource management
 
-#### how it works?
+#### How it works?
 
 ##### Architecture:
 -----------------------------------------------------------------------------------------

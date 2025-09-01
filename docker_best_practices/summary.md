@@ -176,6 +176,13 @@ RUN chown -R studentmgmt:nodejs /app
 * **Why important:** Defines default startup command.
 * **Impact:** Ensures container runs your app immediately.
 
+## CONNECTING DATABASE WITH SCRIPT
+* **db.js**
+This is the database connection module.
+Usually imports something like mysql2 / pg / mongoose.
+Reads .env values using process.env.
+Exports a connection or pool object.
+
 # Dockerfile for Student Service
 
 ## Backend

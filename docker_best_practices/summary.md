@@ -16,7 +16,7 @@ CMD ["nginx", "-g", "daemon off;"]
 * **Why important:** Alpine-based images are small (~5MB) and come with fewer packages → reduces attack surface.
 * **Impact:** Faster image pulls and deployments.Smaller image size → less storage & bandwidth usage.More secure (fewer CVEs compared to full OS images).
 
-### **2. Create Non User :**
+### **2. Create Non-root User :**
 * **Why important:** Creates a dedicated unprivileged user (nginx).
 * **Impact:** Prevents container from running as root → better security.
 

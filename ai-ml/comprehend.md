@@ -188,7 +188,7 @@ making it a good option for non-technical users.
  giving you full control over your data and models.
 - **SAS Viya:** An AI, analytics, and data management platform that includes extensive NLP capabilities. It is well-suited for large enterprises that need to integrate text analysis into a broader data science and business intelligence strategy.
 
-## When to Use Amazon Comprehend
+## When to Use Amazon Comprehend 
 
 **1. Immediate, Out-of-the-Box NLP**
     - Pre-trained APIs for sentiment, entities, key phrases, language detection.
@@ -206,6 +206,7 @@ making it a good option for non-technical users.
 **5. Best in AWS Ecosystem**
     - Seamless integration with S3, Lambda, Redshift, QuickSight.
     - Fits naturally into AWS pipelines.
+     
 ---
 
 **Use Amazon Comprehend** if you want a plug-and-play NLP solution inside AWS, especially for sentiment analysis, entity extraction, key phrases, PII redaction, topic modeling, or healthcare/financial text processing at scale.

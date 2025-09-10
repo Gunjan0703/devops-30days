@@ -193,16 +193,20 @@ making it a good option for non-technical users.
 **1. Immediate, Out-of-the-Box NLP**
     - Pre-trained APIs for sentiment, entities, key phrases, language detection.
     - Great for rapid prototyping with minimal setup.
-**2. High-Volume, Unstructured Text**
+ 
+ **2. High-Volume, Unstructured Text**
     - Analyze customer feedback, reviews, and social media.
     - Extract info from legal/financial docs.
     - Organize documents with topic modeling.
+
 **3. Protecting Sensitive Information**
     - PII detection & redaction for compliance.
     - Comprehend Medical for PHI extraction, conditions, meds, test results.
+
 **4. No ML Expertise Required**
     - Ready-to-use models—no ML knowledge needed.
     - AutoML for custom classification & entities with just labeled data.
+
 **5. Best in AWS Ecosystem**
     - Seamless integration with S3, Lambda, Redshift, QuickSight.
     - Fits naturally into AWS pipelines.

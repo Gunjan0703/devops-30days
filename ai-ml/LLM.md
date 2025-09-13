@@ -20,7 +20,7 @@ LLMs can be customized for specific tasks through fine-tuning or guided by promp
 
 LLM (Large Language Model) architecture refers to the neural network designs used to build models like GPT, Claude, and others. 
 
-![llm](https://www.bing.com/ck/a?!&&p=db08da973c1c48ec90e3112b0964f26b3d0812969e8a6c66743ca624020b50f1JmltdHM9MTc1NzM3NjAwMA&ptn=3&ver=2&hsh=4&fclid=1fb50c58-80e3-6574-218b-1a10814e6489&psq=llms+architecture&u=a1aHR0cHM6Ly93d3cuZ2Vla3Nmb3JnZWVrcy5vcmcvYXJ0aWZpY2lhbC1pbnRlbGxpZ2VuY2UvZXhwbG9yaW5nLXRoZS10ZWNobmljYWwtYXJjaGl0ZWN0dXJlLWJlaGluZC1sYXJnZS1sYW5ndWFnZS1tb2RlbHMv)
+![llm]([https://www.bing.com/ck/a?!&&p=db08da973c1c48ec90e3112b0964f26b3d0812969e8a6c66743ca624020b50f1JmltdHM9MTc1NzM3NjAwMA&ptn=3&ver=2&hsh=4&fclid=1fb50c58-80e3-6574-218b-1a10814e6489&psq=llms+architecture&u=a1aHR0cHM6Ly93d3cuZ2Vla3Nmb3JnZWVrcy5vcmcvYXJ0aWZpY2lhbC1pbnRlbGxpZ2VuY2UvZXhwbG9yaW5nLXRoZS10ZWNobmljYWwtYXJjaGl0ZWN0dXJlLWJlaGluZC1sYXJnZS1sYW5ndWFnZS1tb2RlbHMv](https://media.geeksforgeeks.org/wp-content/uploads/20240826180729/Exploring-the-Technical-Architecture-Behind-Modern-Language-Models.png))
 
 
 #### In-depth Explanation

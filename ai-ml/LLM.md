@@ -20,7 +20,7 @@ LLMs can be customized for specific tasks through fine-tuning or guided by promp
 
 LLM (Large Language Model) architecture refers to the neural network designs used to build models like GPT, Claude, and others. 
 
-![llm](ai-ml/Exploring-the-Technical-Architecture-Behind-Modern-Language-Models.png)
+![llm](Exploring-the-Technical-Architecture-Behind-Modern-Language-Models.png)
 
 
 #### In-depth Explanation

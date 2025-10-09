@@ -1,6 +1,6 @@
 # Architecture of K8s Cluster
 
-![k8s](https://kubernetes.io/images/docs/components-of-kubernetes.svg)
+![k8s](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
 
 **Core Components**
 - Control Plane
@@ -17,4 +17,5 @@ The control plane's components make global decisions about the cluster (for exam
 as well as detecting and responding to cluster events (for example, starting up a new pod when a Deployment's replicas field is unsatisfied).
 
 - **kube-apiserver**
+
 The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.

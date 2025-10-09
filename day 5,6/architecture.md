@@ -18,9 +18,9 @@ as well as detecting and responding to cluster events (for example, starting up 
 
 - **kube-apiserver**
 
---> The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
---> The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others.
---> The API Server services REST operations and provides the frontend to the cluster's shared state through which all other components interact.
+--> The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.\
+--> The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others.\
+--> The API Server services REST operations and provides the frontend to the cluster's shared state through which all other components interact.\
 --> kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. You can run several instances of kube-apiserver and balance traffic between those instances.
 
 - **etcd**

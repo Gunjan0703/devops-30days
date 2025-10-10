@@ -216,4 +216,205 @@ history
   198  kubectl apply -f springboot-deploy.yaml 
   199  kubectl get svc
   200  history
- 
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+21-08-25(Thursday)
+
+Ingress
+RBAC
+network policies
+secrets
+config maps
+cron jobs and jobs
+volumes
+probes
+
+------------------------------------------------
+Ingress -
+ k8s api object that manages external access to services inside a cluster.
+it provides routing rules that map incoming request to micro-services
+
+need?
+ingress centralizes external access with a single entry point
+
+controller -
+it watches for ingress resources in the cluster and configure the underlying loadbalancer.
+ingress controller run as pods in you cluster, sits at edge of a cluster listening to external loadbalancer
+Kubernetes Ingress controllers provide external access to services within a cluster, allowing you to expose services to the external world.
+
+to remove the requirement of load balancers for each msvc ,use ingress
+need?
+ingress is just a rule .to enforce those rules and direct traffic ingress controller is required
+
+user/client request
+challanges:
+msvc management 
+cost effectiveness
+lack of intelligent routing-->path based and host based routing
+
+--------------------------------------------------- 
+
+namespaces
+virtual cluster on top of each layer
+divided into four: default,kube-system,kube-public,node cluster
+(dm set, statefulset are part of namespace )pv is not a part of name space
+things which are part of namespace if we don't specify it will go to default
+
+namespace?
+users can be created,grps also be created with rolesot be vulnerable the 
+
+a particular type of microservice will share the same namespace.
+
+
+----------------------------------------
+network policies-->
+object stored in etcd
+resource to control the communication of pods with each other and external points
+network plugins-will assign unique ip address to all the pods and also have knowledge about cider range
+4 c's of k8s security=>
+1.code
+2.container level sec
+Use minimal base images- the layer should be minimum
+Regular vulnerability scans (Trivy, Clair)- the base image should not be vul
+No running containers as root
+Runtime protection (Seccomp, AppArmor, SELinux)
+3.cluster
+4.cloud
+
+need?
+restrict unauthorized users
+
+ingress - path based routing
+
+------------------------------------------
+
+rbac
+k8s authorization mechanism that regulates access to cluster resources based on the roles of user, group or service accounts.
+ensures entities ca perform only explicitly permitted operations improving securities and minimizing accidental or malicious changes
+role-
+defines a set of permissions on pods ,services
+ cluster role
+it applies clusterwide, similar to role
+ role binding-
+links a role to a user, group or service account within a  namespace
+
+need?
+to restrict the access according to the need of user, group
+
+
+-----------------------------------------------------
+
+both are objects
+both are similar
+both can inject it as env var or vols
+
+secrets -->
+namespace object for securely storing sensitive data,
+need them to avoid hardcoding credentials,enforce best security practices,support dynamic secret management
+dog fooding(in cs&t) for dev/prod parity in 12 factor
+in encoded format,can't see when described after creating it
+
+how to inject in container inside a pod-
+via volumes 
+as an env variable --> changes in secrets will not reflect inside the container
+
+config map -->
+is visible even after describing it
+
+how to inject in container inside a pod-
+1.as an env variable
+
+--------------------------------------
+22-08-25
+
+static pod - any yaml file in /etc/Kubernetes/manifest folder is static pod as its deployment has been take care by kubelet and you dont have to do deployment for them
+
+---------------------------------------------
+jobs-
+asynchronous process
+run to completion job-it come and do its work and go
+types-
+onetime jobs - use when u don't know (what is the schedule) when to execute
+cron jobs-
+u know the schedule
+create a job and that create a pod
+
+------------------------------------------------
+ebs - is like a simple external harddisk,cannot load from one region to another region
+efs is similar to nfs - on the network u can connect multiple machine
+s3 - is a object storage u have to create bucket to 
+store data,dedicated storage services,accessble across regions(by giving access)
+----------------------------------------
+k8s volumes
+outside the machine(something like ebs or efs,s3 doesn't support volumes)
+types-
+1.emptydir-it is possible to connect two cot in a pod to a emptydir
+2.hostpath- it is running on the machine where pod got created
+3.pvc -  created by developers.mention n pvc -->size,accesstype,storage class
+pv- created by storage administrator,all details should be mentioned about the type to storage
+
+once pvc is bound to pv they can't be bound to other(tightly bound)
+pv > pvc(can be less or qual but cannot be more)
+----------------------------
+storage in use protection-
+u cannot delete a pvc when it is associated with pod similarly u cant delete pv when associated with pvc
+
+when u delete a pv the pv will get deleted but the actual storage will retain
+
+---------------------------------------------
+reclaim policies--of a volume can be modified,should be also supported by the underline cloud storage
+
+delete-->data and storage will be deleted(for ex there a file test.txt,if you delete, the data will be gone file will gone and  folder also. 
+recycle-->data will be deleted but storage will not
+retain--> both the data and the object is retain
+
+---------------------------------------
+access mode-->
+there are 4 diff access types
+readwriteonce-all pods running on machine where the first pod came up, can write
+before v 1.22, only the first pod coming can write
+readwritemany-all can read and write
+readonlymany-all the replicas will connected in only read only mode
+readwriteoncepod-only the first pod coming can write
+it is added in v - 1.22
+
+
+
+
+use case- 
+----------------------------------------------
+
+lifecycle:
+
+static binding-->
+in this we are manually creating a pvc and pv and attaching it to the storage class
+
+
+dynamic binding-->
+(object of kind :storage class)
+first you have to create a storage class 
+when u are creating pvc(namespace object) based on it will automatically create a pv
+dynamic-had to add controllers with all the permission, cloud will create pvc by and after that using that pvc it will create a pv and attach it to the pod 
+storage class name will be same, 
+
+volume driver-used to manage the provision of the volumes
+----------------------
+** command in k8s-->entrypoint
+
+
+
+
+
+
+--------------------------------
+probes-are used to check liveness of pod, defined in pod spec
+liveness-when fails ,k8s will kill it and recreate new
+readiness- it will wait until the pod ready
+startup - highest precedence among all,
+
+

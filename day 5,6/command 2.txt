@@ -222,6 +222,252 @@ history
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+    1  clear
+    2  sudo su
+    3  kubectl get pods
+    4  ls
+    5  ls -a
+    6  mkdir -p /home/ubuntu/.kube
+    7  sudo cp /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+    8  sudo chown ubuntu:ubuntu /home/ubuntu/.kube/config
+    9  kubectl get pods
+   10  kubectl get nodes
+   11  kubectl run gunjan-pod --image=nginx
+   12  kubectl get pods
+   13  kubectl get pod -o wide
+   14  curl 10.32.0.5
+   15  kubectl describe pod gunjan-pod
+   16  kubectl delete pod --all
+   17  ps -ef | grep crio
+   18  kubectl run gunjan-pod --image=nginx
+   19  ps -ef | grep gunjan-pod
+   20  ps -ef | grep gunjan
+   21  sudo kill -9 15835
+   22  kubectl get pod
+   23  kubectl describe pod gunjan-pod
+   24  ps -ef | grep gunjan
+   25  kubectl get pod -o wide
+   26  curl 10.32.0.5
+   27  ps -ef | grep crio
+   28  history
+   29  kubectl api-resources
+   30  kubectl describe node
+
+
+Kubernetes automaticallyfailover
+
+-----------------------------------------------------------
+
+deployment 
+
+  1  clear
+    2  sudo su
+    3  clear
+    4  \
+    5  clear
+    6  git clone https://github.com/vilasvarghese/docker-k8s
+    7  cd yaml/
+    8  cd docker-k8s/yaml/deployment/
+    9  ls
+   10  cst deplo-ng.yaml
+   11  cd deplo-ng.yaml
+   12  cat deploy-ng.yaml
+   13  kubectl apply -f deploy-ng.yaml
+   14  kubectl get deploy
+   15  kubectl scale deploy nginx-deployment --replica=5
+   16  kubectl scale deploy nginx-deployment --replicas=5
+   17  kubectl set image deploy nginx-deployment nginx=nginx:latest
+   18  kubectl rollout history deploy nginx-deployment
+   19  kubectl annotate deploy nginx-deployment
+   20  kubectl annotate deploy nginx-deployment kubernetes.io/change-cause="downgraded from latest to 1.16.1"
+   21  kubectl rollout history deploy nginx-deployment
+   22  kubectl rollout undo deploy nginx-deployment
+   23  kubectl rollout history deploy nginx-deployment
+   24  kubectl annotate deploy nginx-deployment kubernetes.io/change-cause="upgraded from 1.16.1 to latest"
+   25  kubectl rollout history deploy nginx-deployment
+   26  kubectl rollout undo deploy nginx-deployment --to-revision=1
+   27  kubectl rollout history deploy nginx-deployment
+   28  kubectl rollout undo deploy nginx-deployment --to-revision=0
+   29  kubectl rollout history deploy nginx-deployment
+   30  history
+
+
+------------------------------------------------------------------------------------
+
+ clear
+    2  sudo su
+    3  clear
+    4  kubectl get deploy
+    5  watch -n 1 kubectl get deploy,pod
+    6  kubrctl get all
+    7  kubectl get all
+    8  watch -n 1 kubectl get all
+    9  nano kubem.sh
+   10  chmod +x kubem.sh
+   11  ./kubem.sh
+   12  kubectl get po
+   13  kubectl get node
+   14  clear
+   15  clear
+   16  \
+   17  clear
+   18  git clone https://github.com/vilasvarghese/docker-k8s
+   19  cd yaml/
+   20  cd docker-k8s/yaml/deployment/
+   21  ls
+   22  cst deplo-ng.yaml
+   23  cd deplo-ng.yaml
+   24  cat deploy-ng.yaml
+   25  kubectl apply -f deploy-ng.yaml
+   26  kubectl get deploy
+   27  kubectl scale deploy nginx-deployment --replica=5
+   28  kubectl scale deploy nginx-deployment --replicas=5
+   29  kubectl set image deploy nginx-deployment nginx=nginx:latest
+   30  kubectl rollout history deploy nginx-deployment
+   31  kubectl annotate deploy nginx-deployment
+   32  kubectl annotate deploy nginx-deployment kubernetes.io/change-cause="downgraded from latest to 1.16.1"
+   33  kubectl rollout history deploy nginx-deployment
+   34  kubectl rollout undo deploy nginx-deployment
+   35  kubectl rollout history deploy nginx-deployment
+   36  kubectl annotate deploy nginx-deployment kubernetes.io/change-cause="upgraded from 1.16.1 to latest"
+   37  kubectl rollout history deploy nginx-deployment
+   38  kubectl rollout undo deploy nginx-deployment --to-revision=1
+   39  kubectl rollout history deploy nginx-deployment
+   40  kubectl rollout undo deploy nginx-deployment --to-revision=0
+   41  kubectl rollout history deploy nginx-deployment
+   42  history
+   43  ls
+   44  kubectl delete deploy --all
+   45  kubectl delete hpa--all
+   46  kubectl delete hpa --all
+   47  kubectl get svc
+   48  kubectl delete svc -all
+   49  kubectl delete svc --all
+   50  cd docker-k8s/yaml/deployment/
+   51  ls
+   52  kubectl apply -f deploy-ng.yaml
+   53  kubectl get po --show-labels
+   54  kubectl get po -l app=nginx
+   55  cd ../services
+   56  ls
+   57  cat cluster-ip.yaml
+   58  kubectl apply -f cluster-ip.yaml
+   59  kubectl get po -o wide
+   60  curl 10.32.0.4
+   61  kubectl get svc
+   62  curl 10.101.213.195
+   63  kubectl delete po nginx-deployment-6d89bff8b5-sjbhn
+   64  curl 10.101.213.195
+   65  kubectl get po
+   66  ls
+   67  cat node-port.yaml
+   68  nano node-port.yaml
+   69  kubectl apply -f node-port.yaml
+   70  kubectl get svc
+   71  cat load-balancer.yaml
+   72  kubectl apply -f load-balancer.yaml
+   73  kubectl get svc
+   74  ip a
+   75  kubectl get svc
+   76  kubectl describe my-service
+   77  kubectl describe svc my-service
+   78  kubectl run mypod --image=nginx -l app-nginx
+   79  kubectl run mypod --image=nginx -l app=nginx
+   80  kubectl describe svc my-service
+   81  history
+
+
+------------------------------------------------------------------------------
+
+   43  ls
+   44  kubectl delete deploy --all
+   45  kubectl delete hpa--all
+   81  history describe svc my-service -l app=nginx5-sjbhn
+
+
+******************************************************
+
+21-08-25(ingress)
+
+
+    1  clear
+    2  sudo su
+    3  nano kubem .sh
+    4  chmod +x kubem.sh
+    5  chmod +x kubem .sh
+    6  ./kubem .sh
+    7  kubectl get pod
+    8  kubectl get node
+    9  clear
+   10  cat kubem .sh
+   11  exit
+   12  clear
+   13  git clone https://github.com/vilasvarghese
+   14  clear
+   15  kubectl create deploy test --image=httpd
+   16  kubectl get po -o wide
+   17  kubectl expose deploy test --port=80 --target-port=80
+   18  kubectl get svc
+   19  curl 10.97.95.255
+   20  \
+   21  kubectl get ns
+   22  kubectl get all -n ingress-nginx
+   23  kubectl get svc
+   24  kubectl apply -f -<<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: test
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+EOF
+
+   25  kubectl delete ingress test
+   26  nano test
+   27  kubectl apply -f test
+   28  cat test
+   29  nano test
+   30  kubectl apply -f test
+   31  kubectl create deploy vilas-deploy --image=vilasvarghese/myapp
+   32  kubectl get po -o wide
+   33  curl 10.32.0.6:8080
+   34  kubectl create deploy tomcat-deploy --image=vilasvarghese/mywebapp
+   35  kubectl get po -o wide
+   36  curl 10.32.0.7:8080
+   37  curl 10.32.0.7:8080/HelloWorld-0.0.1-SNAPSHOT/
+   38  kubectl get deploy
+   39  kubectl expose deploy tomcat-deploy --port=8080 --type=NodePort
+   40  kubectl get svc
+   41  kubectl edit svc tomcat-deploy
+   42  kubectl get svc
+   43  nano testt
+   44  kubectl apply -f testt
+   45  kubectl get svc
+   46  kubectl get all -n ingress-nginx
+   47  kubectl get svc
+   48  curl  10.97.95.255/
+   49  curl  10.97.95.255/test
+   50  curl  10.97.95.255/login
+   51  history
+
+
+
+
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------
 21-08-25(Thursday)
 
